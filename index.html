@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@700&family=Montserrat:wght@700&family=Open+Sans:wght@500&family=Poppins:wght@300;400;700&family=Roboto&family=Sriracha&display=swap"
+        rel="stylesheet">
+    <title>Anshika ka Jamandin!</title>
+</head>
+
+<body>
+    <div class="card">
+        <img src="https://cdn.pixabay.com/photo/2020/10/06/21/54/cake-5633461__480.png" alt="birthday" class="birthday">
+        <div class="text">
+            <h1>Happy Birthday <span id="element">Anshika!</span> </h1>
+            <!-- <p>Have a great future..!</p> -->
+            <p>
+                Yo, yo, yo! Happy freaking birthday, lil champ! It's your day to slay, you glorious human being! ✨</p>
+            <p>- Sam! (Dhakkan)</p>
+            <!-- <div class="credit">Made with <span style="color:tomato">❤</span> by Dhakkan</div> -->
+
+        </div>
+        <div class="space"></div>
+    </div>
+
+
+    
+    <!----------------------------------------------- Setup and start text typed animation! ---------------------------------------------------->
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+    <script>
+        var typed = new Typed('#element', {
+            strings: ['Noob!', 'Chotu!', 'Anshika!'],
+            typeSpeed: 100,
+        });
+    </script>
+
+    <!-------------------------------------------------------------------- Confetti  JS -------------------------------------------------------->
+   
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const canvas = document.createElement("canvas");
+            document.body.appendChild(canvas);
+            const ctx = canvas.getContext("2d");
+            canvas.style.zIndex = "9999"; // Make sure the canvas is on top of other elements
+            canvas.style.pointerEvents = "none"; // Allow interactions with elements beneath the canvas
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+
+            const confetti = [];
+
+            function getRandomColor() {
+                const colors = ["#FF0000", "#FFFF00", "#00FF00", "#0000FF", "#FFA500", "#FFC0CB"];
+                return colors[Math.floor(Math.random() * colors.length)];
+            }
+
+            function createConfetti() {
+                for (let i = 0; i < 200; i++) {
+                    confetti.push({
+                        x: Math.random() * canvas.width,
+                        y: Math.random() * canvas.height,
+                        size: Math.random() * 10 + 5,
+                        color: getRandomColor(),
+                        shape: Math.random() < 0.5 ? 'square' : 'rhombus',
+                        rotation: Math.random() * 360,
+                        speedX: Math.random() * 3 - 1.5,
+                        speedY: Math.random() * 3 + 1,
+                    });
+                }
+            }
+
+            function drawConfetti() {
+                for (let i = 0; i < confetti.length; i++) {
+                    ctx.save();
+                    ctx.translate(confetti[i].x, confetti[i].y);
+                    ctx.rotate((confetti[i].rotation * Math.PI) / 180);
+
+                    ctx.fillStyle = confetti[i].color;
+                    if (confetti[i].shape === 'square') {
+                        ctx.fillRect(-confetti[i].size / 2, -confetti[i].size / 2, confetti[i].size, confetti[i].size);
+                    } else {
+                        ctx.beginPath();
+                        ctx.moveTo(0, -confetti[i].size / 2);
+                        ctx.lineTo(confetti[i].size / 2, 0);
+                        ctx.lineTo(0, confetti[i].size / 2);
+                        ctx.lineTo(-confetti[i].size / 2, 0);
+                        ctx.closePath();
+                        ctx.fill();
+                    }
+
+                    ctx.restore();
+                }
+            }
+
+            function updateConfetti() {
+                for (let i = 0; i < confetti.length; i++) {
+                    confetti[i].x += confetti[i].speedX;
+                    confetti[i].y += confetti[i].speedY;
+
+                    if (confetti[i].y > canvas.height) {
+                        confetti.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+
+            function animateConfetti() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                drawConfetti();
+                updateConfetti();
+                requestAnimationFrame(animateConfetti);
+            }
+
+            createConfetti();
+            animateConfetti();
+        });
+    </script>
+    <!-- <script>
+
+        // start
+
+        const start = () => {
+            setTimeout(function () {
+                confetti.start()
+            }, 1000); // 1000 is time that after 1 second start the confetti ( 1000 = 1 sec)
+        };
+
+        //  Stop
+
+        const stop = () => {
+            setTimeout(function () {
+                confetti.stop()
+            }, 5000); // 5000 is time that after 5 second stop the confetti ( 5000 = 5 sec)
+        };
+
+        start();
+        stop(); -->
+    </script>
+        <!------------------------------------------------------------------------------------------------------------------------------------------>
+    
+
+
+</body>
+
+
+</html>
